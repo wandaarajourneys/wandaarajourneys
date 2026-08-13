@@ -68,7 +68,7 @@ export interface TourPackage {
   };
   groupDiscount: GroupDiscount;
   difficulty: "Easy" | "Moderate" | "Challenging";
-  tier?: "Budget" | "Mid Range" | "Luxury";
+  tier?: "Budget Friendly" | "Mid Range" | "Luxury";
   activityTypes: ActivityType[];
   rating: number;
   reviewCount: number;
