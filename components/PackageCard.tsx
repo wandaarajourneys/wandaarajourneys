@@ -36,7 +36,15 @@ export function PackageCard({ pkg }: { pkg: TourPackage }) {
       </div>
       <div className="p-5">
         <h3 className="font-display text-xl text-teal-800">{pkg.name}</h3>
-        <p className="mt-1.5 text-sm text-teal-700/70 line-clamp-2">{pkg.summary}</p>
+        {pkg.tagline && <p className="text-xs font-semibold text-terracotta-600 mt-1">{pkg.tagline}</p>}
+        {pkg.tier && <p className="text-xs text-teal-700/60 mt-1 uppercase tracking-wider">{pkg.tier} Tier</p>}
+        <p className="mt-2 text-sm text-teal-700/70 line-clamp-2">{pkg.summary}</p>
+        
+        <div className="mt-3 flex flex-col gap-1 text-xs text-teal-700/70">
+          <p><span className="font-semibold text-teal-800">Included:</span> {pkg.inclusions.slice(0, 2).join(", ")}...</p>
+          <p><span className="font-semibold text-teal-800">Not Included:</span> {pkg.exclusions.slice(0, 2).join(", ")}...</p>
+        </div>
+
         <div className="mt-3">
           <StarRating rating={pkg.rating} reviewCount={pkg.reviewCount} />
         </div>

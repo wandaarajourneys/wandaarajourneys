@@ -110,7 +110,7 @@ export default async function PackageDetailPage({
             </Reveal>
 
             <Reveal delay={0.1}>
-              <h2 className="mt-12 font-display text-2xl text-teal-800">Day-by-Day Itinerary</h2>
+              <h2 className="mt-12 font-display text-2xl text-teal-800">Day by Day Itinerary</h2>
               <ol className="mt-6 space-y-6 border-l-2 border-terracotta-200 pl-6">
                 {pkg.itinerary.map((day) => (
                   <li key={day.day} className="relative">

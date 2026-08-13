@@ -4,11 +4,11 @@ export const siteConfig = {
   description:
     "Wandaara Tours and Travel designs unforgettable safaris, beach escapes, and trekking adventures across Kenya and East Africa.",
   url: "https://www.wandaaratours.com",
-  email: "info@wandaaratours.com",
+  email: "wandaarajourneys@gmail.com",
   phone: "+254702229265",
   phoneDisplay: "+254 702 229 265",
   whatsappNumber: "254702229265",
-  whatsappDefaultMessage: "Hi Wandaara Tours, I'd like to inquire about...",
+  whatsappDefaultMessage: "Jambo Wandaara Tours! I am interested in planning a safari and would love some more information.",
   address: {
     line1: "Wandaara House, Muthithi Road",
     line2: "Westlands, Nairobi, Kenya",
@@ -21,7 +21,7 @@ export const siteConfig = {
     tiktok: "https://tiktok.com/@wandaaratours",
     x: "https://x.com/wandaaratours",
   },
-  founded: 2011,
+  founded: 2026,
 } as const;
 
 export function whatsappLink(message: string = siteConfig.whatsappDefaultMessage) {
@@ -33,5 +33,6 @@ export function telLink() {
 }
 
 export function mailtoLink(subject = "Travel Inquiry") {
-  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}`;
+  const body = `Hello Wandaara Tours team,\n\nI am interested in learning more about your packages. Please let me know the next steps.\n\nThank you!`;
+  return `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

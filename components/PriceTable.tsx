@@ -39,7 +39,7 @@ export function PriceTable({ pkg }: { pkg: TourPackage }) {
               season === "offPeak" ? "bg-teal-700 text-white" : "text-teal-800"
             }`}
           >
-            Off-Peak
+            Off Peak
           </button>
           <button
             role="tab"

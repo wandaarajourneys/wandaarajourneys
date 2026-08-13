@@ -55,6 +55,7 @@ export interface TourPackage {
   durationDays: number;
   durationNights: number;
   summary: string;
+  tagline?: string;
   description: string;
   heroImage: string;
   gallery: string[];
@@ -67,6 +68,7 @@ export interface TourPackage {
   };
   groupDiscount: GroupDiscount;
   difficulty: "Easy" | "Moderate" | "Challenging";
+  tier?: "Budget" | "Mid Range" | "Luxury";
   activityTypes: ActivityType[];
   rating: number;
   reviewCount: number;

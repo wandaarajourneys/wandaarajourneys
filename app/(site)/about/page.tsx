@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const team = [
-  { name: "Wanjiru Kamau", role: "Founder & Lead Safari Guide", seed: "team-wanjiru" },
-  { name: "Omar Hassan", role: "Coast & Islands Specialist", seed: "team-omar" },
-  { name: "Grace Chebet", role: "Mountain Trekking Guide", seed: "team-grace" },
-  { name: "Brian Otieno", role: "Head of Guest Experience", seed: "team-brian" },
+  { name: "Hesbon Njugi", role: "Founder & Lead Safari Guide", seed: "team-hesbon" },
+  { name: "Felix Gachogu", role: "Operations & Logistics Director", seed: "team-felix" },
+  { name: "Eric Waiyaki", role: "Senior Tour Coordinator", seed: "team-eric" },
+  { name: "Esther Muthoni", role: "Head of Customer Experience & Guest Relations", seed: "team-esther" },
 ];
 
 const values = [
@@ -30,7 +30,7 @@ const values = [
   {
     icon: Heart,
     title: "Genuine Care",
-    description: "We plan every trip as if it were for our own family — because many of our clients become just that.",
+    description: "We plan every trip as if it were for our own family, because many of our clients become just that.",
   },
   {
     icon: Globe2,
@@ -65,22 +65,22 @@ export default function AboutPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Our Story"
-              title={`${siteConfig.founded} — a small idea, and a big country`}
+              title={`${siteConfig.founded}, a small idea and a big country`}
             />
             <div className="mt-6 space-y-4 text-teal-700/80 leading-relaxed">
               <p>
                 Wandaara Tours and Travel started with a single Land Cruiser and a founder who couldn&apos;t
                 understand why so many visitors left Kenya having only seen it through a coach window. We
-                set out to build slower, more personal trips — small groups, real guides, and itineraries
+                set out to build slower, more personal trips, with small groups, real guides, and itineraries
                 shaped around what travelers actually want to see.
               </p>
               <p>
-                Fifteen years later, we&apos;ve grown into a full-service tour operator covering safaris,
-                coastal escapes, and mountain treks across Kenya and Tanzania — but the philosophy hasn&apos;t
+                Over the years, we&apos;ve grown into a dedicated team covering safaris,
+                coastal escapes, and mountain treks across East Africa. Yet our philosophy hasn&apos;t
                 changed. Every trip is still planned by someone who has actually been there.
               </p>
               <p>
-                Today, our mission is simple: design trips that are unforgettable for travelers, and
+                Today, our mission remains simple: design trips that are unforgettable for travelers and
                 genuinely beneficial for the communities and ecosystems that make them possible.
               </p>
             </div>

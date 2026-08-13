@@ -1,118 +1,70 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { DestinationCard } from "@/components/DestinationCard";
 import { EmptyState } from "@/components/EmptyState";
-import type { ActivityType, Destination, Region } from "@/types";
+import type { Destination } from "@/types";
 
 export function DestinationExplorer({ destinations }: { destinations: Destination[] }) {
-  const [region, setRegion] = useState<Region | "All">("All");
-  const [activity, setActivity] = useState<ActivityType | "All">("All");
-  const [country, setCountry] = useState<string>("All");
+  const [selectedSlug, setSelectedSlug] = useState<string>("default");
 
-  const regions = useMemo(
-    () => Array.from(new Set(destinations.map((d) => d.region))),
-    [destinations],
-  );
-  const countries = useMemo(
-    () => Array.from(new Set(destinations.map((d) => d.country))),
-    [destinations],
-  );
-  const activities = useMemo(
-    () => Array.from(new Set(destinations.flatMap((d) => d.activityTypes))),
-    [destinations],
-  );
+  const localSlugs = ["maasai-mara", "diani-beach", "amboseli", "lake-naivasha"];
+  
+  const localDestinations = destinations.filter(d => d.region !== "International");
+  const internationalDestinations = destinations.filter(d => d.region === "International");
 
-  const filtered = destinations.filter((d) => {
-    if (region !== "All" && d.region !== region) return false;
-    if (country !== "All" && d.country !== country) return false;
-    if (activity !== "All" && !d.activityTypes.includes(activity)) return false;
-    return true;
-  });
-
-  function reset() {
-    setRegion("All");
-    setActivity("All");
-    setCountry("All");
-  }
+  const displayedDestinations = selectedSlug === "default" 
+    ? destinations.filter(d => localSlugs.includes(d.slug))
+    : destinations.filter(d => d.slug === selectedSlug);
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-3 mb-10" role="group" aria-label="Filter destinations">
-        <FilterSelect
-          label="Region"
-          value={region}
-          onChange={(v) => setRegion(v as Region | "All")}
-          options={regions}
-        />
-        <FilterSelect
-          label="Country"
-          value={country}
-          onChange={setCountry}
-          options={countries}
-        />
-        <FilterSelect
-          label="Activity"
-          value={activity}
-          onChange={(v) => setActivity(v as ActivityType | "All")}
-          options={activities}
-        />
-        {(region !== "All" || activity !== "All" || country !== "All") && (
+      <div className="flex flex-wrap items-center gap-3 mb-10" role="group" aria-label="Search destinations">
+        <div className="flex items-center gap-2">
+          <label htmlFor="destination-search" className="text-sm font-medium text-teal-800">
+            Find a Destination
+          </label>
+          <select
+            id="destination-search"
+            value={selectedSlug}
+            onChange={(e) => setSelectedSlug(e.target.value)}
+            className="rounded-full border border-teal-700/20 bg-white px-4 py-2 text-sm text-teal-800 outline-none focus-visible:border-terracotta-400 min-w-[250px]"
+          >
+            <option value="default">View Local Favourites</option>
+            <optgroup label="Local">
+              {localDestinations.map(d => (
+                <option key={d.slug} value={d.slug}>{d.name}</option>
+              ))}
+            </optgroup>
+            <optgroup label="International">
+              {internationalDestinations.map(d => (
+                <option key={d.slug} value={d.slug}>{d.name}</option>
+              ))}
+            </optgroup>
+          </select>
+        </div>
+        {selectedSlug !== "default" && (
           <button
-            onClick={reset}
+            onClick={() => setSelectedSlug("default")}
             className="text-sm font-semibold text-terracotta-600 hover:underline"
           >
-            Clear filters
+            Clear search
           </button>
         )}
       </div>
 
-      {filtered.length === 0 ? (
+      {displayedDestinations.length === 0 ? (
         <EmptyState
-          title="No destinations match those filters"
-          description="Try a different combination, or clear filters to see all destinations."
+          title="No destination found"
+          description="Try selecting a different destination from the list."
         />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((destination) => (
+          {displayedDestinations.map((destination) => (
             <DestinationCard key={destination.slug} destination={destination} />
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-function FilterSelect({
-  label,
-  value,
-  onChange,
-  options,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  options: string[];
-}) {
-  const id = `filter-${label.toLowerCase()}`;
-  return (
-    <div className="flex items-center gap-2">
-      <label htmlFor={id} className="text-sm font-medium text-teal-800">
-        {label}
-      </label>
-      <select
-        id={id}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="rounded-full border border-teal-700/20 bg-white px-3 py-1.5 text-sm text-teal-800 outline-none focus-visible:border-terracotta-400"
-      >
-        <option value="All">All</option>
-        {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
-      </select>
     </div>
   );
 }

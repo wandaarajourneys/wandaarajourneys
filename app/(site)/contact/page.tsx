@@ -10,7 +10,7 @@ import { getDestinationBySlug, getDestinations } from "@/lib/data/destinations";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Wandaara Tours and Travel by email, WhatsApp, or phone — or send us an inquiry and we'll reply within 24 hours.",
+    "Get in touch with Wandaara Tours and Travel by email, WhatsApp, or phone, or send us an inquiry and we'll reply within 24 hours.",
 };
 
 // Prisma queries run at request time on Vercel (SSR), not at build time.
@@ -125,7 +125,7 @@ export default async function ContactPage({
               <h3 className="mt-6 font-display text-lg text-teal-800 flex items-center gap-2">
                 <Clock size={18} aria-hidden="true" /> Office Hours
               </h3>
-              <p className="mt-2 text-sm text-teal-700/70">Monday – Saturday: 8:00 AM – 6:00 PM (EAT)</p>
+              <p className="mt-2 text-sm text-teal-700/70">Monday to Saturday: 8:00 AM to 6:00 PM (EAT)</p>
             </div>
 
             <div className="rounded-2xl overflow-hidden shadow-card h-72">
