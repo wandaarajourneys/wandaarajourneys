@@ -81,14 +81,10 @@ git push -u origin main
 2. Click **Add New** > **Project** and select your Wandaara GitHub repository.
 3. **Wait! Do not click Deploy yet.**
 
-### 3. Override the Build Command
-Because Wandaara uses Prisma for the database, you must tell Vercel to apply database migrations *before* it builds the Next.js app.
-1. In the project setup screen, expand **Build and Output Settings**.
-2. Toggle the **Build Command** override and paste this exactly:
-   ```bash
-   npm run db:generate && npm run db:migrate:deploy && next build
-   ```
-   *(Note: This ensures your production database structure is safely updated).*
+### 3. Build Command Configuration
+Because Wandaara uses Prisma for the database, database migrations must be applied *before* building the Next.js app.
+The `package.json` is already configured with the correct `build` script (`prisma generate && prisma migrate deploy && next build`). 
+You **do not** need to override the build command in Vercel. Leave the default settings as they are.
 
 ### 4. Add Initial Environment Variables
 Expand the **Environment Variables** section and add the keys you prepared in Step 1. At a minimum, you need:
@@ -120,17 +116,13 @@ Once the initial deployment finishes, you need to configure persistent storage f
 
 ## 🌱 Step 4: Seed the Production Database (Crucial)
 
-Right now, your live database is completely empty. You need to create the initial admin user and baseline data (destinations, packages). You must do this from your local computer, pointing to the live database.
+Right now, your live database is completely empty. You need to create the initial admin user and baseline data (destinations, packages).
 
-1. On your Vercel Dashboard, go to **Settings** > **Environment Variables**.
-2. Find `DATABASE_URL` and copy its value.
-3. On your local machine, open the `.env.local` file.
-4. **Temporarily** replace your local `DATABASE_URL` with the production connection string.
-5. In your local terminal, run the seed script:
-   ```bash
-   npm run db:seed
-   ```
-6. **🚨 CRITICAL:** Immediately change your `.env.local` `DATABASE_URL` back to your local development database `postgresql://wandaara:wandaara@localhost:5432/wandaara` so you don't accidentally edit production data while developing locally!
+We have included a temporary, one-time seed endpoint to make this easy.
+
+1. Navigate to your live Vercel URL and append `/api/admin/seed` (e.g., `https://your-domain.vercel.app/api/admin/seed`).
+2. Wait a few seconds for the database to populate. You should see a JSON response saying "Database seeded successfully!".
+3. **🚨 CRITICAL:** Once seeded, you **must delete** the file `app/api/admin/seed/route.ts` from your repository and push the update. Leaving this file exposed is a security risk.
 
 ---
 
@@ -138,6 +130,7 @@ Right now, your live database is completely empty. You need to create the initia
 
 1. **First Login:** Navigate to your live Vercel URL (specifically `https://your-domain.vercel.app/admin/login`).
 2. **Change Admin Password:** Log in using the `ADMIN_SEED_EMAIL` and `ADMIN_SEED_PASSWORD`. You will be prompted (or should manually go) to change the password immediately.
-3. **Test Image Uploads:** Go to the Destinations tab in the admin panel and attempt to upload an image to verify that Vercel Blob storage is working.
-4. **Test Inquiries:** Submit a test inquiry on the public site to verify that your SMTP configuration is successfully delivering emails to your `INQUIRY_TO_EMAIL` address (if you configured SMTP).
-5. **Custom Domain:** If you purchased a domain name, add it under Vercel's **Settings > Domains**. Ensure your `NEXT_PUBLIC_SITE_URL` environment variable matches the primary custom domain and redeploy so password resets and sitemaps use the correct link.
+3. **Create Additional Users:** As a Super Admin, navigate to the User Management page to create accounts for your team members. You can assign them specific roles (`Tour Manager`, `Content Editor`, `Customer Support`) based on their responsibilities.
+4. **Test Image Uploads:** Go to the Destinations tab in the admin panel and attempt to upload an image to verify that Vercel Blob storage is working.
+5. **Test Inquiries:** Submit a test inquiry on the public site to verify that your SMTP configuration is successfully delivering emails to your `INQUIRY_TO_EMAIL` address (if you configured SMTP).
+6. **Custom Domain:** If you purchased a domain name, add it under Vercel's **Settings > Domains**. Ensure your `NEXT_PUBLIC_SITE_URL` environment variable matches the primary custom domain and redeploy so password resets and sitemaps use the correct link.
