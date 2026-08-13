@@ -94,7 +94,7 @@ export async function GET() {
           email: adminEmail,
           passwordHash,
           name: "Hesbon Njugi",
-          role: "ADMIN",
+          role: "SUPER_ADMIN",
           forcePasswordChange: true,
         },
       });

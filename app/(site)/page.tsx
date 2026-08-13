@@ -23,7 +23,7 @@ const pillars = [
   {
     icon: HeartHandshake,
     title: "Fair, Transparent Pricing",
-    description: "No hidden fees — clear per-person pricing, group discounts, and custom quotes on request.",
+    description: "No hidden fees, clear per-person pricing, group discounts, and custom quotes on request.",
   },
   {
     icon: Leaf,
@@ -148,7 +148,7 @@ export default async function HomePage() {
               Ready to plan your East African adventure?
             </h2>
             <p className="mt-4 text-sand-100/80 max-w-xl mx-auto">
-              Tell us your dates, budget, and dream destinations — our travel specialists will build a custom itinerary within 24 hours.
+              Tell us your dates, budget, and dream destinations, our travel specialists will build a custom itinerary within 24 hours.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link

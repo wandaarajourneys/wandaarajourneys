@@ -32,8 +32,6 @@ const columns = [
 ];
 
 export function Footer() {
-  const yearsExperience = new Date().getFullYear() - siteConfig.founded;
-
   return (
     <footer className="bg-teal-800 text-sand-100">
       <div className="container-page py-14">
@@ -127,24 +125,13 @@ export function Footer() {
                   <FaWhatsapp size={16} aria-hidden="true" /> WhatsApp Us
                 </a>
               </li>
-              <li className="flex items-start gap-2.5 text-sand-100/70">
-                <MapPin size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
-                <span>
-                  {siteConfig.address.line1}
-                  <br />
-                  {siteConfig.address.line2}
-                </span>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-sand-100/60">
           <span className="flex items-center gap-2">
-            <Award size={16} className="text-terracotta-400" aria-hidden="true" /> Licensed Tour Operator — KATO Member
-          </span>
-          <span className="flex items-center gap-2">
-            <ShieldCheck size={16} className="text-terracotta-400" aria-hidden="true" /> {yearsExperience}+ Years of Experience
+            <Award size={16} className="text-terracotta-400" aria-hidden="true" /> Licensed Tour Operator, KATO Member
           </span>
           <span className="flex items-center gap-2">
             <Lock size={16} className="text-terracotta-400" aria-hidden="true" /> Secure Payments

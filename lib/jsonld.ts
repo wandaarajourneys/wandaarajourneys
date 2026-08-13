@@ -11,12 +11,6 @@ export function travelAgencyJsonLd() {
     email: siteConfig.email,
     telephone: siteConfig.phone,
     description: siteConfig.description,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: siteConfig.address.line1,
-      addressLocality: "Nairobi",
-      addressCountry: "KE",
-    },
     sameAs: [
       siteConfig.social.facebook,
       siteConfig.social.instagram,

@@ -112,7 +112,7 @@ async function main() {
         email: adminEmail,
         passwordHash,
         name: "Site Admin",
-        role: "ADMIN",
+        role: "SUPER_ADMIN",
         forcePasswordChange: true,
       },
     });

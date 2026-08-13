@@ -47,8 +47,10 @@ enum InquiryStatus {
 }
 
 enum AdminRole {
-  ADMIN
-  EDITOR
+  SUPER_ADMIN
+  TOUR_MANAGER
+  CONTENT_EDITOR
+  CUSTOMER_SUPPORT
 }
 
 // ---------- Content models ----------
@@ -151,7 +153,9 @@ model AdminUser {
   email                 String    @unique
   passwordHash          String
   name                  String
-  role                  AdminRole @default(ADMIN)
+  phone                 String?
+  role                  AdminRole @default(TOUR_MANAGER)
+  isActive              Boolean   @default(true)
   forcePasswordChange   Boolean   @default(true)
   failedLoginAttempts   Int       @default(0)
   lockedUntil           DateTime?

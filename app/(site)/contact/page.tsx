@@ -97,8 +97,8 @@ export default async function ContactPage({
           ))}
         </div>
 
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-12">
-          <div className="rounded-2xl bg-white p-6 md:p-10 shadow-card">
+        <div className="mt-14 flex justify-center">
+          <div className="w-full max-w-2xl rounded-2xl bg-white p-6 md:p-10 shadow-card">
             <h2 className="font-display text-2xl text-teal-800">Send an Inquiry</h2>
             <p className="mt-2 text-sm text-teal-700/70">
               Fields marked <span className="text-terracotta-600">*</span> are required.
@@ -108,35 +108,6 @@ export default async function ContactPage({
                 defaultInterest={defaultInterest}
                 defaultMessage={defaultMessage}
                 interestOptions={interestOptions}
-              />
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="rounded-2xl bg-white p-6 shadow-card">
-              <h3 className="font-display text-lg text-teal-800 flex items-center gap-2">
-                <MapPin size={18} aria-hidden="true" /> Our Office
-              </h3>
-              <p className="mt-2 text-sm text-teal-700/70">
-                {siteConfig.address.line1}
-                <br />
-                {siteConfig.address.line2}
-              </p>
-              <h3 className="mt-6 font-display text-lg text-teal-800 flex items-center gap-2">
-                <Clock size={18} aria-hidden="true" /> Office Hours
-              </h3>
-              <p className="mt-2 text-sm text-teal-700/70">Monday to Saturday: 8:00 AM to 6:00 PM (EAT)</p>
-            </div>
-
-            <div className="rounded-2xl overflow-hidden shadow-card h-72">
-              <iframe
-                title="Wandaara Tours office location"
-                src={siteConfig.address.mapEmbedSrc}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </div>

@@ -108,7 +108,7 @@ export async function main() {
         email: adminEmail,
         passwordHash,
         name: "Hesbon Njugi",
-        role: "ADMIN",
+        role: "SUPER_ADMIN",
         forcePasswordChange: true,
       },
     });
