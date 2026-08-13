@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette: warm sand neutrals, terracotta accent, deep teal + forest green */
+  --color-sand-50: #fbf7ef;
+  --color-sand-100: #f5ecd9;
+  --color-sand-200: #ecdcbc;
+  --color-sand-300: #e0c596;
+  --color-sand-400: #cfa869;
+  --color-sand-500: #bd8e4a;
+
+  --color-terracotta-50: #fdf1ea;
+  --color-terracotta-100: #f9dcc9;
+  --color-terracotta-300: #e79c6c;
+  --color-terracotta-400: #dd7f45;
+  --color-terracotta-500: #c85f2b;
+  --color-terracotta-600: #a84a20;
+  --color-terracotta-700: #833a1a;
+
+  --color-teal-50: #eaf1f0;
+  --color-teal-100: #cfe0dd;
+  --color-teal-300: #7fa8a2;
+  --color-teal-400: #3e7770;
+  --color-teal-500: #235b54;
+  --color-teal-600: #16423d;
+  --color-teal-700: #0f302c;
+  --color-teal-800: #0a2321;
+  --color-teal-900: #071716;
+
+  --color-forest-400: #6f8f5b;
+  --color-forest-500: #55743f;
+  --color-forest-600: #405b2e;
+
+  --color-navy-700: #16223a;
+  --color-navy-800: #0e1626;
+  --color-navy-900: #090e18;
+
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-worksans), "Helvetica Neue", Arial, sans-serif;
+
+  --shadow-card: 0 8px 30px -12px rgba(15, 48, 44, 0.25);
+  --shadow-card-hover: 0 16px 40px -14px rgba(15, 48, 44, 0.35);
+}
+
+:root {
+  --background: var(--color-sand-50);
+  --foreground: var(--color-teal-800);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background: var(--color-terracotta-300);
+  color: var(--color-teal-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-terracotta-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.container-page {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}

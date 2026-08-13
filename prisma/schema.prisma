@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Enums ----------
+
+enum Region {
+  Coast
+  RiftValley
+  MaasaiMara
+  NorthernKenya
+  CentralKenya
+  International
+}
+
+enum ActivityType {
+  Safari
+  Beach
+  Hiking
+  Cultural
+  Wildlife
+  Honeymoon
+  Adventure
+  CityBreak
+}
+
+enum Difficulty {
+  Easy
+  Moderate
+  Challenging
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum InquiryStatus {
+  NEW
+  RESPONDED
+  ARCHIVED
+}
+
+enum AdminRole {
+  ADMIN
+  EDITOR
+}
+
+// ---------- Content models ----------
+
+model Destination {
+  id              String         @id @default(cuid())
+  slug            String         @unique
+  name            String
+  country         String
+  region          Region
+  activityTypes   ActivityType[]
+  tagline         String
+  description     String
+  heroImage       String
+  gallery         String[]
+  highlights      String[]
+  bestTimeToVisit String
+  packages        Package[]      @relation("PackageDestinations")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([region])
+}
+
+model Package {
+  id              String         @id @default(cuid())
+  slug            String         @unique
+  name            String
+  destinations    Destination[]  @relation("PackageDestinations")
+  durationDays    Int
+  durationNights  Int
+  summary         String
+  description     String
+  heroImage       String
+  gallery         String[]
+  itinerary       Json
+  inclusions      String[]
+  exclusions      String[]
+  pricing         Json
+  groupMinSize    Int
+  groupDiscountPercent Int
+  difficulty      Difficulty
+  activityTypes   ActivityType[]
+  rating          Float          @default(5)
+  reviewCount     Int            @default(0)
+  featured        Boolean        @default(false)
+  testimonials    Testimonial[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  location    String
+  quote       String
+  rating      Float
+  photo       String?
+  package     Package? @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  packageId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogPost {
+  slug         String     @id
+  title        String
+  excerpt      String
+  content      String[]
+  coverImage   String
+  author       String
+  tags         String[]
+  readingTime  String
+  status       BlogStatus @default(DRAFT)
+  publishedAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Inquiry {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  interest    String?
+  travelDates String?
+  travelers   Int?
+  message     String
+  status      InquiryStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+}
+
+// ---------- Admin / auth ----------
+
+model AdminUser {
+  id                    String    @id @default(cuid())
+  email                 String    @unique
+  passwordHash          String
+  name                  String
+  role                  AdminRole @default(ADMIN)
+  forcePasswordChange   Boolean   @default(true)
+  failedLoginAttempts   Int       @default(0)
+  lockedUntil           DateTime?
+  resetTokenHash        String?
+  resetTokenExpiresAt   DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  activityLogs          AdminActivityLog[]
+}
+
+model AdminActivityLog {
+  id        String    @id @default(cuid())
+  user      AdminUser? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId    String?
+  userEmail String
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime  @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+}
