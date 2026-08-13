@@ -9,6 +9,7 @@ const PUBLIC_ADMIN_PATHS = new Set([
   "/api/admin/auth/login",
   "/api/admin/auth/forgot-password",
   "/api/admin/auth/reset-password",
+  "/api/admin/seed",
 ]);
 
 // Fast, DB-free gate: verifies the JWT signature/expiry and redirects
